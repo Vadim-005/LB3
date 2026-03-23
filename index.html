@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Анкета студента</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 350px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Анкета студента</h2>
+
+    <form id="studentForm">
+        <label>Ім'я:</label>
+        <input type="text" id="name" required>
+
+        <label>Прізвище:</label>
+        <input type="text" id="surname" required>
+
+        <label>Вік:</label>
+        <input type="number" id="age" required>
+
+        <label>Спеціальність:</label>
+        <input type="text" id="specialty" required>
+
+        <label>Курс:</label>
+        <select id="course">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+        </select>
+
+        <button type="submit">Зберегти</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('studentForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Отримуємо дані
+        const name = document.getElementById('name').value;
+        const surname = document.getElementById('surname').value;
+        const age = document.getElementById('age').value;
+        const specialty = document.getElementById('specialty').value;
+        const course = document.getElementById('course').value;
+
+        // Формуємо текст
+        const data = 
+`Анкета студента:
+Ім'я: ${name}
+Прізвище: ${surname}
+Вік: ${age}
+Спеціальність: ${specialty}
+Курс: ${course}`;
+
+        // Створюємо файл
+        const blob = new Blob([data], { type: 'text/plain' });
+        const link = document.createElement('a');
+
+        link.href = URL.createObjectURL(blob);
+        link.download = 'student_data.txt';
+
+        // Автоматичне скачування
+        link.click();
+    });
+</script>
+
+</body>
+</html>
